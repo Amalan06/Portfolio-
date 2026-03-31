@@ -54,7 +54,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 4rem;
+  padding: 1.5rem 2rem;
   z-index: 100;
   border-bottom: 1px solid var(--line);
   background: rgba(10,10,10,0.85);
@@ -89,8 +89,8 @@ nav {
 
 /* ── SECTIONS SHARED ── */
 section {
-  padding: 8rem 4rem;
-  max-width: 1100px;
+  padding: 8rem 2rem;
+  width: min(1100px, calc(100% - 4rem));
   margin: 0 auto;
   border-bottom: 1px solid var(--line);
   opacity: 0;
@@ -249,19 +249,32 @@ section.visible { opacity: 1; transform: translateY(0); }
   gap: 2.5rem;
 }
 
-.conveyor-row { overflow: hidden; position: relative; }
+.conveyor-row {
+  overflow: visible;
+  position: relative;
+  padding-top: 0.25rem;
+}
 
 .conveyor-row::before,
 .conveyor-row::after {
   content: '';
   position: absolute;
-  top: 0; bottom: 0;
+  top: 1.8rem;
+  bottom: 0;
   width: 80px;
   z-index: 2;
   pointer-events: none;
 }
-.conveyor-row::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
-.conveyor-row::after  { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+
+.conveyor-row::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg), transparent);
+}
+
+.conveyor-row::after  {
+  right: 0;
+  background: linear-gradient(to left, var(--bg), transparent);
+}
 
 .conveyor-label {
   font-size: 0.65rem;
@@ -269,31 +282,40 @@ section.visible { opacity: 1; transform: translateY(0); }
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 0.85rem;
+  position: relative;
+  z-index: 3;
 }
 
 .conveyor-track {
   display: flex;
   gap: 0.6rem;
   width: max-content;
-  /* direction set via JS */
+  animation-duration: 18s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transition: animation-duration 0.35s ease;
 }
 
-.conveyor-track.paused { animation-play-state: paused !important; }
+.conveyor-track.slow {
+  animation-duration: 45s !important;
+}
 
 @keyframes scrollRight {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
 @keyframes scrollLeft {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
 }
 
 .conveyor-track.dir-right {
-  animation: scrollRight 18s linear infinite;
+  animation-name: scrollRight;
 }
+
 .conveyor-track.dir-left {
-  animation: scrollLeft 18s linear infinite;
+  animation-name: scrollLeft;
 }
 
 .tag {
@@ -304,6 +326,8 @@ section.visible { opacity: 1; transform: translateY(0); }
   white-space: nowrap;
   flex-shrink: 0;
   transition: border-color 0.2s, color 0.2s;
+  position: relative;
+  z-index: 1;
 }
 
 .tag:hover { border-color: var(--accent); color: var(--accent); }
@@ -457,15 +481,19 @@ section.visible { opacity: 1; transform: translateY(0); }
 .contact-link-row:hover { color: var(--fg); }
 .contact-link-row:hover .link-arrow { transform: translateX(4px); }
 
+.email-protected-row {
+  user-select: none;
+}
+
 .link-label { letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.7rem; }
 .link-value { font-size: 0.85rem; }
 .link-arrow { transition: transform 0.2s; }
 
 /* ── FOOTER ── */
 footer {
-  max-width: 1100px;
+  width: min(1100px, calc(100% - 4rem));
   margin: 0 auto;
-  padding: 2.5rem 4rem;
+  padding: 2.5rem 0;
   display: flex;
   justify-content: space-between;
   font-size: 0.7rem;
@@ -477,15 +505,25 @@ footer {
 ::-webkit-scrollbar-thumb { background: var(--muted); }
 
 @media (max-width: 768px) {
-  nav { padding: 1.25rem 1.5rem; }
-  section { padding: 5rem 1.5rem; }
-  #hero { padding: 10rem 1.5rem 5rem; }
+  nav { padding: 1.25rem 1.25rem; }
+
+  section {
+    padding: 5rem 1.25rem;
+    width: min(1100px, calc(100% - 2.5rem));
+  }
+
+  #hero { padding: 10rem 1.25rem 5rem; }
   .hero-meta { flex-direction: column; gap: 2rem; }
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
   .exp-row { grid-template-columns: 1fr; gap: 0.75rem; }
   .project-row { grid-template-columns: 2rem 1fr; }
   .project-year { display: none; }
-  footer { flex-direction: column; gap: 0.5rem; padding: 2rem 1.5rem; }
+  footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: min(1100px, calc(100% - 2.5rem));
+    padding: 2rem 0;
+  }
   .scroll-hint { display: none; }
   .nav-links { gap: 1.25rem; }
 }

@@ -19,7 +19,7 @@ document.addEventListener('mousemove', e => {
 });
 document.addEventListener('mouseleave', () => wrap.classList.remove('active'));
 
-document.querySelectorAll('a, .tag').forEach(el => {
+document.querySelectorAll('a, .tag, .contact-link-row').forEach(el => {
   el.addEventListener('mouseenter', () => hovered = true);
   el.addEventListener('mouseleave', () => hovered = false);
 });
@@ -91,7 +91,7 @@ function drawJarvis(time) {
     ctx.beginPath();
     ctx.moveTo(30, 0);
     ctx.lineTo(36, 0);
-    ctx.strokeStyle = accent + '0.7)';
+    ctx.strokeStyle = accentS + '0.7)';
     ctx.lineWidth = 1.5;
     ctx.shadowColor = hovered ? '#f0ede8' : '#e8d5b0';
     ctx.shadowBlur = 4;
@@ -127,12 +127,12 @@ function loop(ts) {
 requestAnimationFrame(loop);
 
 // ─────────────────────────────────────────
-// CONVEYOR BELT — pause on hover
+// CONVEYOR BELT — slow on hover
 // ─────────────────────────────────────────
 document.querySelectorAll('.conveyor-row').forEach(row => {
   const track = row.querySelector('.conveyor-track');
-  row.addEventListener('mouseenter', () => track.classList.add('paused'));
-  row.addEventListener('mouseleave', () => track.classList.remove('paused'));
+  row.addEventListener('mouseenter', () => track.classList.add('slow'));
+  row.addEventListener('mouseleave', () => track.classList.remove('slow'));
 });
 
 // ─────────────────────────────────────────
