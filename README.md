@@ -31,4 +31,4 @@ open index.html
 ## Contact
 
 - GitHub: [github.com/Amalan06](https://github.com/Amalan06)
-- LinkedIn: [linkedin.com/in/amalanvenkatesan-975ab4285](https://linkedin.com/in/amalanvenkatesan-975ab4285)
+- LinkedIn: [linkedin.com/in/amalan-venkatesan-975ab4285](https://linkedin.com/in/amalan-venkatesan-975ab4285)
